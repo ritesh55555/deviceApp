@@ -1,0 +1,78 @@
+{
+  "mapType" : {
+    "capability": [
+      ["switch"],
+      ["robotCleanerCleaningMode"],
+      ["robotCleanerMovement"],
+      ["battery"]
+    ],
+    "resourceType": [
+      ["oic.r.switch.binary"],
+      ["oic.r.mode"],
+      ["oic.r.mode"],
+      ["oic.r.energy.battery"]
+    ],
+    "resourceHref": [
+      "/powerswitch",
+      "/operationalmode",
+      "/movementMode",
+      "/battery"
+    ]
+  },
+  "mapData" : {
+    "switch": {
+      "property": ["value"],
+      "propertyType": ["bool"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["switch"],
+      "attributeType": ["string"],
+      "command": ["on", "off"],
+      "commandProperty": [
+        "value",
+        "value"
+      ],
+      "useCommandValue": true,
+      "unit": [null],
+      "valueMap": [
+        {
+          "STValue": ["on", "off"],
+          "OCFValue": [true, false]
+        }
+      ]
+    },
+    "robotCleanerCleaningMode": {
+      "property": ["supportedModes", "modes"],
+      "propertyType": ["array", "array"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "supportedModes": ["auto", "part", "repeat", "manual", "stop", "map"],
+      "component": "main",
+      "attribute": [null, "robotCleanerCleaningMode"],
+      "attributeType": [null, "string"],
+      "command": ["setRobotCleanerCleaningMode"],
+      "commandProperty": ["modes"],
+      "unit": [null, null]
+    },
+    "robotCleanerMovement": {
+      "property": ["supportedModes", "modes"],
+      "propertyType": ["array", "array"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "supportedModes": ["homing", "idle", "charging", "alarm", "powerOff", "reserve", "point", "after", "cleaning"],
+      "component": "main",
+      "attribute": [null, "robotCleanerMovement"],
+      "attributeType": [null, "string"],
+      "command": ["setRobotCleanerMovement"],
+      "commandProperty": ["modes"],
+      "unit": [null, null]
+    },
+    "battery": {
+      "property": ["charge"],
+      "propertyType": ["number"],
+      "if": ["oic.if.rw", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["battery"],
+      "attributeType": ["number"],
+      "unit": ["%"]
+    }
+  }
+}

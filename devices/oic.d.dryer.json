@@ -1,0 +1,62 @@
+{
+  "mapType" : {
+    "capability": [
+      ["switch"],
+      ["dryerOperatingState"]
+    ],
+    "resourceType": [
+      ["oic.r.switch.binary"],
+      ["oic.r.operational.state"]
+    ],
+    "resourceHref": [
+      "/powerswitch",
+      "/operationalstate"
+    ]
+  },
+  "mapData" : {
+    "switch": {
+      "property": ["value"],
+      "propertyType": ["bool"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["switch"],
+      "attributeType": ["string"],
+      "command": ["on", "off"],
+      "commandProperty": [
+        "value",
+        "value"
+      ],
+      "useCommandValue": true,
+      "unit": [null],
+      "valueMap": [
+        {
+          "STValue": ["on", "off"],
+          "OCFValue": [true, false]
+        }
+      ]
+    },
+    "dryerOperatingState": {
+      "property": ["machineStates", "currentMachineState"],
+      "propertyType": ["array", "string"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["supportedMachineStates", "machineState"],
+      "attributeType": ["array", "string"],
+      "command": ["setMachineState"],
+      "commandProperty": ["currentMachineState"],
+      "commandArguments": true,
+      "unit": [null, null],
+      "valueMap": [
+        {
+          "usePredefine" : true,
+          "STValue": ["pause", "run", "stop"],
+          "OCFValue": ["Pause", "Run", "Stop"]
+        },
+        {
+          "STValue": ["pause", "run", "stop"],
+          "OCFValue": ["Pause", "Run", "Stop"]
+        }
+      ]
+    }
+  }
+}

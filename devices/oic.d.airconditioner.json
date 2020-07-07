@@ -1,0 +1,133 @@
+{
+  "mapType" : {
+    "capability": [
+      ["switch"],
+      ["thermostatCoolingSetpoint"],
+      ["thermostatHeatingSetpoint"],
+      ["temperatureMeasurement"],
+      ["relativeHumidityMeasurement"],
+      ["fanSpeed"],
+      ["thermostatSetpoint"],
+      ["airConditionerMode"]
+    ],
+    "resourceType": [
+      ["oic.r.switch.binary"],
+      ["oic.r.temperature"],
+      ["oic.r.temperature"],
+      ["oic.r.temperature"],
+      ["oic.r.humidity"],
+      ["oic.r.airflow"],
+      ["oic.r.temperature"],
+      ["oic.r.mode"]
+    ],
+    "resourceHref": [
+      "/powerswitch",
+      "/coolingtargettemperature",
+      "/heatingtargettemperature",
+      "/currenttemperature",
+      "/humidity",
+      "/airFlow",
+      "/targettemperature",
+      "/operationalmode"
+    ]
+  },
+  "mapData" : {
+    "switch": {
+      "property": ["value"],
+      "propertyType": ["bool"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["switch"],
+      "attributeType": ["string"],
+      "command": ["on", "off"],
+      "commandProperty": [
+        "value",
+        "value"
+      ],
+      "useCommandValue": true,
+      "unit": [null],
+      "valueMap": [
+        {
+          "STValue": ["on", "off"],
+          "OCFValue": [true, false]
+        }
+      ]
+    },
+    "thermostatCoolingSetpoint": {
+      "property": ["temperature", "units"],
+      "propertyType": ["number", "string"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["coolingSetpoint", null],
+      "command": ["setCoolingSetpoint"],
+      "commandProperty": ["temperature"],
+      "attributeType": ["number", null],
+      "hasUnit" : true,
+      "unit": ["C"]
+    },
+    "thermostatHeatingSetpoint": {
+      "property": ["temperature", "units"],
+      "propertyType": ["number", "string"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["heatingSetpoint", null],
+      "command": ["setHeatingSetpoint"],
+      "commandProperty": ["temperature"],
+      "attributeType": ["number", null],
+      "hasUnit" : true,
+      "unit": ["C"]
+    },
+    "temperatureMeasurement": {
+      "property": ["temperature", "units"],
+      "propertyType": ["number", "string"],
+      "if": ["oic.if.s", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["temperature", null],
+      "attributeType": ["number", null],
+      "hasUnit" : true,
+      "unit": ["C"]
+    },
+    "relativeHumidityMeasurement": {
+      "property": ["humidity"],
+      "propertyType": ["number"],
+      "if": ["oic.if.s", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["humidity"],
+      "attributeType": ["number"],
+      "unit": ["%"]
+    },
+    "fanSpeed": {
+      "property": ["speed"],
+      "propertyType": ["number"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["fanSpeed"],
+      "command": ["setFanSpeed"],
+      "commandProperty": ["speed"],
+      "attributeType": ["number"],
+      "unit": [null]
+    },
+    "thermostatSetpoint": {
+      "property": ["temperature", "units"],
+      "propertyType": ["number", "string"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["thermostatSetpoint", null],
+      "attributeType": ["number", null],
+      "hasUnit" : true,
+      "unit": ["C"]
+    },
+    "airConditionerMode": {
+      "property": ["supportedModes", "modes"],
+      "propertyType": ["array", "array"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "supportedModes": ["ai", "cool", "dry", "wind", "auto", "coolClean", "dryClean"],
+      "component": "main",
+      "attribute": [null, "airConditionerMode"],
+      "attributeType": [null, "string"],
+      "command": ["setAirConditionerMode"],
+      "commandProperty": ["modes"],
+      "unit": [null, null]
+    }
+  }
+}

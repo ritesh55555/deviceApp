@@ -1,0 +1,98 @@
+{
+  "mapType" : {
+    "capability": [
+      ["switch"],
+      ["dishwasherOperatingState"],
+      ["doorControl"],
+      ["dishwasherMode"]
+    ],
+    "resourceType": [
+      ["oic.r.switch.binary"],
+      ["oic.r.operational.state"],
+      ["oic.r.door"],
+      ["oic.r.mode"]
+    ],
+    "resourceHref": [
+      "/powerswitch",
+      "/operationalstate",
+      "/dishwasherdoor",
+      "/operationalmode"
+    ]
+  },
+  "mapData" : {
+    "switch": {
+      "property": ["value"],
+      "propertyType": ["bool"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["switch"],
+      "attributeType": ["string"],
+      "command": ["on", "off"],
+      "commandProperty": [
+        "value",
+        "value"
+      ],
+      "useCommandValue": true,
+      "unit": [null],
+      "valueMap": [
+        {
+          "STValue": ["on", "off"],
+          "OCFValue": [true, false]
+        }
+      ]
+    },
+    "dishwasherOperatingState": {
+      "property": ["machineStates", "currentMachineState"],
+      "propertyType": ["array", "string"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["supportedMachineStates", "machineState"],
+      "attributeType": ["array", "string"],
+      "command": ["setMachineState"],
+      "commandProperty": ["currentMachineState"],
+      "commandArguments": true,
+      "unit": [null, null],
+      "valueMap": [
+        {
+          "usePredefine" : true,
+          "STValue": ["pause", "run", "stop"],
+          "OCFValue": ["Pause", "Run", "Stop"]
+        },
+        {
+          "STValue": ["pause", "run", "stop"],
+          "OCFValue": ["Pause", "Run", "Stop"]
+        }
+      ]
+    },
+    "doorControl": {
+      "property": ["openState"],
+      "propertyType": ["string"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["door"],
+      "attributeType": ["string"],
+      "command": ["close", "open"],
+      "commandProperty": ["openState", "openState"],
+      "useCommandValue": true,
+      "unit": [null],
+      "valueMap": [
+        {
+          "STValue": ["closed", "open", "closing", "opening"],
+          "OCFValue": ["Closed", "Open",  "Closed", "Open"]
+        }
+      ]
+    },
+    "dishwasherMode": {
+      "property": ["supportedModes", "modes"],
+      "propertyType": ["array", "array"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "supportedModes": ["auto", "quick", "rinse", "dry"],
+      "component": "main",
+      "attribute": [null, "dishwasherMode"],
+      "attributeType": [null, "string"],
+      "command": ["setDishwasherMode"],
+      "commandProperty": ["modes"],
+      "unit": [null, null]
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "mapType" : {
+    "capability": [
+      ["thermostatHeatingSetpoint"],
+      ["thermostatCoolingSetpoint"],
+      ["thermostatMode"],
+      ["temperatureMeasurement"]
+    ],
+    "resourceType": [
+      ["oic.r.temperature"],
+      ["oic.r.temperature"],
+      ["oic.r.mode"],
+      ["oic.r.temperature"]
+    ],
+    "resourceHref": [
+      "/heatingtargettemperature",
+      "/coolingtargettemperature",
+      "/operationalmode",
+      "/currenttemperature"
+    ]
+  },
+  "mapData" : {
+    "thermostatHeatingSetpoint": {
+      "property": ["temperature", "units"],
+      "propertyType": ["number", "string"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["heatingSetpoint", null],
+      "command": ["setHeatingSetpoint"],
+      "commandProperty": ["temperature"],
+      "attributeType": ["number", null],
+      "hasUnit" : true,
+      "unit": ["C"]
+    },
+    "thermostatCoolingSetpoint": {
+      "property": ["temperature", "units"],
+      "propertyType": ["number", "string"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["coolingSetpoint", null],
+      "command": ["setCoolingSetpoint"],
+      "commandProperty": ["temperature"],
+      "attributeType": ["number", null],
+      "hasUnit" : true,
+      "unit": ["C"]
+    },
+    "thermostatMode": {
+      "property": ["supportedModes", "modes"],
+      "propertyType": ["array", "array"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "supportedModes": ["auto", "cool", "eco", "rush hour", "emergency heat", "heat", "off"],
+      "component": "main",
+      "attribute": [null, "thermostatMode"],
+      "attributeType": [null, "string"],
+      "command": ["setThermostatMode"],
+      "commandProperty": ["modes"],
+      "unit": [null, null]
+    },
+    "temperatureMeasurement": {
+      "property": ["temperature", "units"],
+      "propertyType": ["number", "string"],
+      "if": ["oic.if.s", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["temperature", null],
+      "attributeType": ["number", null],
+      "hasUnit" : true,
+      "unit": ["C"]
+    }
+  }
+}

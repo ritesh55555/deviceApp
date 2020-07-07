@@ -1,0 +1,35 @@
+<html>
+<head>
+    <title>Resource types</title>
+</head>
+<body>
+    <h1 style="text-align:center">OCF Resource Tool</h1>
+
+    <h2 style="text-align:center">Select Resource types for the device <%= deviceName %> </h2>
+
+    <form action="/customize" method="post" >
+        <div id='resourceContent' ></div>
+
+        <script>
+            var deviceData = <%- JSON.stringify(data) %> ;
+            let content ="" ;
+            const capability =   deviceData.mapType.capability;
+            const resourceType = deviceData.mapType.resourceType ;
+            const resourceHref = deviceData.mapType.resourceHref ;
+            for(i= 0 ; i<capability.length ; i++){
+                content += `<input type="checkbox" id="${capability[i]}" name="${capability[i]}" value="${resourceType[i]}">`
+                content += `<label for="${capability[i]}"> ${resourceType[i]}</label>`
+                content += `<input type="text" id="${capability[i]}" value="${resourceHref[i]}" name="${capability[i]}"><br><br>`
+            }
+            document.getElementById("resourceContent").innerHTML = content;
+        </script>
+
+        <button id = "next" type="submit">Next</button>
+    </form>
+
+    <form action="/device" method="GET" >
+        <button id = "back" type="submit">Back</button>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+{
+  "mapType" : {
+    "capability": [
+      ["switch"]
+    ],
+    "resourceType": [
+      ["oic.r.switch.binary"]
+    ],
+    "resourceHref": [
+      "/powerswitch"
+    ]
+  },
+  "mapData" : {
+    "switch": {
+      "property": ["value"],
+      "propertyType": ["bool"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["switch"],
+      "attributeType": ["string"],
+      "command": ["on", "off"],
+      "commandProperty": [
+        "value",
+        "value"
+      ],
+      "useCommandValue": true,
+      "unit": [null],
+      "valueMap": [
+        {
+          "STValue": ["on", "off"],
+          "OCFValue": [true, false]
+        }
+      ]
+    }
+  }
+}

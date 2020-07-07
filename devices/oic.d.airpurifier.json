@@ -1,0 +1,50 @@
+{
+  "mapType" : {
+    "capability": [
+      ["switch"],
+      ["fanSpeed"]
+    ],
+    "resourceType": [
+      ["oic.r.switch.binary"],
+      ["oic.r.airflow"]
+    ],
+    "resourceHref": [
+      "/powerswitch",
+      "/airFlow"
+    ]
+  },
+  "mapData" : {
+    "switch": {
+      "property": ["value"],
+      "propertyType": ["bool"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["switch"],
+      "attributeType": ["string"],
+      "command": ["on", "off"],
+      "commandProperty": [
+        "value",
+        "value"
+      ],
+      "useCommandValue": true,
+      "unit": [null],
+      "valueMap": [
+        {
+          "STValue": ["on", "off"],
+          "OCFValue": [true, false]
+        }
+      ]
+    },
+    "fanSpeed": {
+      "property": ["speed"],
+      "propertyType": ["number"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["fanSpeed"],
+      "command": ["setFanSpeed"],
+      "commandProperty": ["speed"],
+      "attributeType": ["number"],
+      "unit": [null]
+    }
+  }
+}

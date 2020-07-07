@@ -1,0 +1,103 @@
+{
+  "mapType" : {
+    "capability": [
+      ["switch"],
+      ["ovenMode"],
+      ["ovenOperatingState"],
+      ["ovenSetpoint"],
+      ["temperatureMeasurement"]
+    ],
+    "resourceType": [
+      ["oic.r.switch.binary"],
+      ["oic.r.mode"],
+      ["oic.r.operational.state"],
+      ["oic.r.temperature"],
+      ["oic.r.temperature"]
+    ],
+    "resourceHref": [
+      "/powerswitch",
+      "/operationalmode",
+      "/operationalstate",
+      "/targettemperature",
+      "/currenttemperature"
+    ]
+  },
+  "mapData" : {
+    "switch": {
+      "property": ["value"],
+      "propertyType": ["bool"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["switch"],
+      "attributeType": ["string"],
+      "command": ["on", "off"],
+      "commandProperty": [
+        "value",
+        "value"
+      ],
+      "useCommandValue": true,
+      "unit": [null],
+      "valueMap": [
+        {
+          "STValue": ["on", "off"],
+          "OCFValue": [true, false]
+        }
+      ]
+    },
+    "ovenMode": {
+      "property": ["supportedModes", "modes"],
+      "propertyType": ["array", "array"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "supportedModes": ["heating", "grill", "warming", "defrosting"],
+      "component": "main",
+      "attribute": [null, "ovenMode"],
+      "attributeType": [null, "string"],
+      "command": ["setOvenMode"],
+      "commandProperty": ["modes"],
+      "unit": [null, null]
+    },
+    "ovenOperatingState": {
+      "property": ["machineStates", "currentMachineState", "progressPercentage", "runningTime", "remainingTime", null],
+      "propertyType": ["array", "string", "number", "string", "string", null],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["supportedMachineStates", "machineState", "progress", null, null, "operationTime"],
+      "attributeType": ["array", "string", "number", null, null, "number"],
+      "unit": [null, null, "%", null, null, null],
+      "valueMap": [
+        {
+          "usePredefine" : true,
+          "STValue": ["ready", "running", "paused"],
+          "OCFValue": ["Off", "Idle", "Running", "ReadyToStart", "DelayedStart", "Paused", "EndOfCycle", "Alarm"]
+        },
+        {
+          "STValue": ["ready", "running", "paused"],
+          "OCFValue": ["ReadyToStart", "Running", "Paused"]
+        },
+        null
+      ]
+    },
+    "ovenSetpoint": {
+      "property": ["temperature", "units"],
+      "propertyType": ["number", "string"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["ovenSetpoint", null],
+      "command": ["setOvenSetpoint"],
+      "commandProperty": ["temperature"],
+      "attributeType": ["number", null],
+      "hasUnit" : true,
+      "unit": ["C"]
+    },
+    "temperatureMeasurement": {
+      "property": ["temperature", "units"],
+      "propertyType": ["number", "string"],
+      "if": ["oic.if.s", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["temperature", null],
+      "attributeType": ["number", null],
+      "hasUnit" : true,
+      "unit": ["C"]
+    }
+  }
+}

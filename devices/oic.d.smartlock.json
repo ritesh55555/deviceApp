@@ -1,0 +1,48 @@
+{
+  "mapType" : {
+    "capability": [
+      ["battery"],
+      ["lock"]
+    ],
+    "resourceType": [
+      ["oic.r.energy.battery"],
+      ["oic.r.lock.status"]
+    ],
+    "resourceHref": [
+      "/battery",
+      "/LockStatusResURI"
+    ]
+  },
+  "mapData" : {
+    "battery": {
+      "property": ["charge"],
+      "propertyType": ["number"],
+      "if": ["oic.if.rw", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["battery"],
+      "attributeType": ["number"],
+      "unit": ["%"]
+    },
+    "lock": {
+      "property": ["lockState"],
+      "propertyType": ["string"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["lock"],
+      "command": ["lock", "unlock"],
+      "commandProperty": [
+        "lockState",
+        "lockState"
+      ],
+      "useCommandValue": true,
+      "unit": [null],
+      "attributeType": ["string"],
+      "valueMap": [
+        {
+          "STValue": ["locked", "unlocked", "unknown", "unlocked with timeout"],
+          "OCFValue": ["Locked", "Unlocked", null, null]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "mapType" : {
+    "capability": [
+      ["switch"],
+      ["audioVolume", "audioMute"],
+      ["tvChannel"],
+      ["mediaInputSource"]
+    ],
+    "resourceType": [
+      ["oic.r.switch.binary"],
+      ["oic.r.audio"],
+      ["x.com.samsung.tv.channel"],
+      ["x.com.samsung.mediainputsource"]
+    ],
+    "resourceHref": [
+      "/powerswitch",
+      "/AudioResURI",
+      "/TVChannelcontrolResURI",
+      "/MediaInputSourceResURI"
+    ]
+  },
+  "mapData" : {
+    "switch": {
+      "property": ["value"],
+      "propertyType": ["bool"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["switch"],
+      "attributeType": ["string"],
+      "command": ["on", "off"],
+      "commandProperty": [
+        "value",
+        "value"
+      ],
+      "useCommandValue": true,
+      "unit": [null],
+      "valueMap": [
+        {
+          "STValue": ["on", "off"],
+          "OCFValue": [true, false]
+        }
+      ]
+    },
+    "audioVolume": {
+      "property": ["volume"],
+      "propertyType": ["number"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["volume"],
+      "command": ["setVolume", "volumeUp", "volumeDown"],
+      "commandProperty": ["volume", "volume", "volume"],
+      "attributeType": ["number"],
+      "unit": ["%"]
+    },
+    "audioMute": {
+      "property": ["mute"],
+      "propertyType": ["bool"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["mute"],
+      "command": ["setMute", "mute", "unmute"],
+      "commandProperty": ["mute", "mute", "mute"],
+      "attributeType": ["string"],
+      "useCommandValue": true,
+      "unit": [null],
+      "valueMap": [
+        {
+          "STValue": [null, "muted", "unmuted"],
+          "OCFValue": [null, true, false]
+        }
+      ]
+    },
+    "tvChannel": {
+      "property": ["x.com.samsung.channel", "x.com.samsung.command"],
+      "propertyType": ["string"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["tvChannel"],
+      "command": ["setTvChannel", "channelUp", "channelDown"],
+      "commandProperty": ["x.com.samsung.channel", "x.com.samsung.command", "x.com.samsung.command"],
+      "ocfCommand": [null, "increase", "decrease"],
+      "attributeType": ["string"],
+      "unit": [null]
+    },
+    "mediaInputSource": {
+      "property": ["x.com.samsung.modes", "x.com.samsung.supportedModes"],
+      "propertyType": ["array", "array"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["inputSource", "supportedInputSources"],
+      "command": ["setInputSource"],
+      "commandProperty": ["x.com.samsung.modes"],
+      "attributeType": ["string", "array"],
+      "unit": [null, null]
+    }
+  }
+}

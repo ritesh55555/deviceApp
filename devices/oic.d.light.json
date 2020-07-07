@@ -1,0 +1,101 @@
+{
+  "mapType" : {
+    "capability": [
+      ["colorControl"],
+      ["colorTemperature"],
+      ["switch"],
+      ["switchLevel"],
+      ["illuminanceMeasurement"]
+    ],
+    "resourceType": [
+      ["oic.r.colour.chroma"],
+      ["oic.r.colour.colourtemperature"],
+      ["oic.r.switch.binary"],
+      ["oic.r.light.dimming"],
+      ["oic.r.light.brightness"]
+    ],
+    "resourceHref": [
+      "/ColourChromaResURI",
+      "/ColourTemperatureResURI",
+      "/powerswitch",
+      "/DimmingResURI",
+      "/BrightnessResURI"
+    ]
+  },
+  "mapData" : {
+    "colorTemperature": {
+      "property": ["ct"],
+      "propertyType": ["number"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["colorTemperature"],
+      "attributeType": ["number"],
+      "command": ["setColorTemperature"],
+      "commandProperty": [
+        "ct"
+      ],
+      "unit": ["K"]
+    },
+    "switchLevel": {
+      "property": ["dimmingSetting"],
+      "propertyType": ["number"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["level"],
+      "attributeType": ["number"],
+      "command": ["setLevel"],
+      "commandProperty": [
+        "dimmingSetting"
+      ],
+      "unit": ["%"],
+      "useRange": true
+    },
+    "colorControl": {
+      "property": ["hue", "saturation"],
+      "propertyType": ["number", "number"],
+      "if": ["oic.if.a"],
+      "component": "main",
+      "attribute": ["hue", "saturation"],
+      "attributeType": ["number", "number"],
+      "command": ["setHue", "setSaturation", "setColor"],
+      "commandProperty": [
+        "hue",
+        "saturation",
+        ["hue", "saturation"]
+      ],
+      "unit": ["%", "%"],
+      "valueMultiplier": [3.6, 327.67]
+    },
+    "switch": {
+      "property": ["value"],
+      "propertyType": ["bool"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["switch"],
+      "attributeType": ["string"],
+      "command": ["on", "off"],
+      "commandProperty": [
+        "value",
+        "value"
+      ],
+      "useCommandValue": true,
+      "unit": [null],
+      "valueMap": [
+        {
+          "STValue": ["on", "off"],
+          "OCFValue": [true, false]
+        }
+      ]
+    },
+    "illuminanceMeasurement": {
+      "property": ["brightness"],
+      "propertyType": ["number"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["illuminance"],
+      "attributeType": ["number"],
+      "unit": ["lux"],
+      "valueMultiplier": [0.001]
+    }
+  }
+}

@@ -1,0 +1,78 @@
+<html>
+<head>
+    <title>Resource types</title>
+</head>
+<body>
+    <h1 style="text-align:center">OCF Resource Tool</h1>
+    <h2 style="text-align:center">Select Resource types for the device <%= deviceName %> </h2>
+
+    <h3>Add Resource type :</h3>
+      
+    <label for="resource">Resource type</label>
+    <input  placeholder="Enter Resource type" id="resource" type="text">
+    
+    
+    <label for="href">Resource href</label>
+    <input  placeholder="Enter Resource href" id="href" type="text">
+    
+    <button id="add" onclick="addResource()">Add</button>
+
+    <h3>All Resources :</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Resource type</th>
+          <th>Resource href</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="tablebody">
+      </tbody>
+    </table>
+
+    <form action="/device" method="GET" >
+        <button id = "back" type="submit">Back</button>
+    </form>
+
+
+
+    <script>
+        let data = [] ; 
+
+        function addResource(){
+
+            const resource = document.getElementById('resource').value ;
+            const href = document.getElementById('href').value ;
+            data.push([resource,href]);
+            populateTable() ;
+        }
+        function deleteResource(res , hrf ){
+            
+            for (i = 0; i < data.length; i++) {
+                if (data[i][0] == res && data[i][1] == hrf) {
+                    data[i][0] = 0 ;
+                    data[i][1] = 0 ;
+                }
+            }
+            populateTable() ;
+        }
+
+        function populateTable() {
+            // Generate the table body
+            var tableBody = '';
+            for (i = 0; i < data.length; i++) {
+                if (data[i][0] != 0){
+                    tableBody += '<tr>';
+                    tableBody += '  <td>' + data[i][0] + '</td>';
+                    tableBody += '  <td>' + data[i][1] + '</td>';
+                    tableBody += '  <td><input type="button" value="Delete" onclick="deleteResource(\'' + data[i][0] +  '\',\''  + data[i][1] +  '\')" ></td>'
+                    tableBody += '</tr>';
+                }
+            }
+            // Fill the table content
+            document.getElementById('tablebody').innerHTML = tableBody;
+        }
+    </script>
+
+</body>
+</html>

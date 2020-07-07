@@ -1,0 +1,42 @@
+{
+  "mapType" : {
+    "capability": [
+      ["battery"],
+      ["motionSensor"]
+    ],
+    "resourceType": [
+      ["oic.r.energy.battery"],
+      ["oic.r.sensor.motion"]
+    ],
+    "resourceHref": [
+      "/battery",
+      "/MotionResURI"
+    ]
+  },
+  "mapData" : {
+    "battery": {
+      "property": ["charge"],
+      "propertyType": ["number"],
+      "if": ["oic.if.rw", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["battery"],
+      "attributeType": ["number"],
+      "unit": ["%"]
+    },
+    "motionSensor": {
+      "property": ["value"],
+      "propertyType": ["bool"],
+      "if": ["oic.if.s", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["motion"],
+      "attributeType": ["string"],
+      "unit": [null],
+      "valueMap": [
+        {
+          "STValue": ["active", "inactive"],
+          "OCFValue": [true, false]
+        }
+      ]
+    }
+  }
+}

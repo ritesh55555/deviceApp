@@ -1,0 +1,82 @@
+{
+  "mapType" : {
+    "capability": [
+      ["doorControl"],
+      ["rapidCooling"],
+      ["temperatureMeasurement"],
+      ["refrigerationSetpoint"]
+    ],
+    "resourceType": [
+      ["oic.r.door"],
+      ["oic.r.refrigeration"],
+      ["oic.r.temperature"],
+      ["oic.r.temperature"]
+    ],
+    "resourceHref": [
+      "/coolerdoor",
+      "/refrigeration",
+      "/coolermeasuredtemperature",
+      "/coolertargettemperature"
+    ]
+  },
+  "mapData" : {
+    "doorControl": {
+      "property": ["openState"],
+      "propertyType": ["string"],
+      "if": ["oic.if.s", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["door"],
+      "attributeType": ["string"],
+      "command": ["close", "open"],
+      "commandProperty": ["openState", "openState"],
+      "useCommandValue": true,
+      "unit": [null],
+      "valueMap": [
+        {
+          "STValue": ["closed", "open", "closing", "opening"],
+          "OCFValue": ["Closed", "Open",  "Closed", "Open"]
+        }
+      ]
+    },
+    "rapidCooling": {
+      "property": ["rapidCool"],
+      "propertyType": ["bool"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["rapidCooling"],
+      "attributeType": ["string"],
+      "command": ["setRapidCooling"],
+      "commandProperty": ["rapidCool"],
+      "commandArguments": true,
+      "unit": [null],
+      "valueMap": [
+        {
+          "STValue": ["on", "off"],
+          "OCFValue": [true, false]
+        }
+      ]
+    },
+    "temperatureMeasurement": {
+      "property": ["temperature", "units"],
+      "propertyType": ["number", "string"],
+      "if": ["oic.if.s", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["temperature", null],
+      "attributeType": ["number", null],
+      "hasUnit" : true,
+      "unit": ["C"]
+    },
+    "refrigerationSetpoint": {
+      "property": ["temperature", "units"],
+      "propertyType": ["number", "string"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["refrigerationSetpoint", null],
+      "command": ["setRefrigerationSetpoint"],
+      "commandProperty": ["temperature"],
+      "attributeType": ["number", null],
+      "hasUnit" : true,
+      "unit": ["C"]
+    }
+  }
+}
