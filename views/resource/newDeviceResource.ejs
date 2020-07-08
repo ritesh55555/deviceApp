@@ -1,38 +1,90 @@
 <html>
 <head>
     <title>Resource types</title>
+    <style>
+        body{
+            background-color: lightblue;
+        }
+        .wrapper {
+            width : 500px ;
+            margin : 20px auto ;
+            background-color: white;
+            padding : 3px 120px 20px 120px ;
+            border-radius: 20px ;
+        }
+        .addOption{
+            margin : -10px 0px 0px 0px ;
+        }
+        .addOption input{
+            height : 30px  ;
+            font-size: 14px;
+            margin-right: 20px;
+        }
+        button{
+            cursor: pointer;
+            background-color:lightblue ;
+            border : 0 ;
+            font-size: 15px;
+        }
+        .addBtn{
+            width : 15% ; 
+            padding : 6px 8px ;
+        }
+        .backBtn{
+            font-size: 16px;
+            width : 30% ; 
+            padding : 8px 8px ;
+            border-radius: 20px;
+            margin-top : 60px ;
+        }
+        .nextBtn{
+            font-size: 16px;
+            width : 30% ; 
+            padding : 8px 8px ;
+            border-radius: 20px;
+            margin-top : -50px ;
+            margin-left: 300px;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
 </head>
 <body>
-    <h1 style="text-align:center">OCF Resource Tool</h1>
-    <h2 style="text-align:center">Select Resource types for the device <%= deviceName %> </h2>
+    <div class="wrapper">
+        <h1 style="text-align:center">OCF Resource Tool</h1>
+        <h2 style="text-align:center">Select Resource types for the device <%= deviceName %> </h2>
 
-    <h3>Add Resource type :</h3>
-      
-    <label for="resource">Resource type</label>
-    <input  placeholder="Enter Resource type" id="resource" type="text">
-    
-    
-    <label for="href">Resource href</label>
-    <input  placeholder="Enter Resource href" id="href" type="text">
-    
-    <button id="add" onclick="addResource()">Add</button>
+        <h3 style="text-align:center">Add Resource type :</h3>
+        
+        <div class="addOption">
+            <input  placeholder="Enter Resource type" id="resource" type="text">
+            <input  placeholder="Enter Resource href" id="href" type="text">
+            <button id="add" onclick="addResource()" class="addBtn">Add</button>
+        </div>
 
-    <h3>All Resources :</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Resource type</th>
-          <th>Resource href</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody id="tablebody">
-      </tbody>
-    </table>
+        <h3 style="text-align:center">All Resources :</h3>
+        <table>
+        <thead>
+            <tr>
+            <th>Resource type</th>
+            <th>Resource href</th>
+            <th></th>
+            </tr>
+        </thead>
+        <tbody id="tablebody">
+        </tbody>
+        </table>
 
-    <form action="/device" method="GET" >
-        <button id = "back" type="submit">Back</button>
-    </form>
+        <form action="/device" method="GET" >
+                <button id = "back" type="submit" class="backBtn">Back</button>
+        </form>
+        <form >
+            <button id = "next" type="submit" class="nextBtn">Next</button>
+        </form>
+    </div>
 
 
 

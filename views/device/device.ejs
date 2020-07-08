@@ -1,26 +1,70 @@
 <html>
 <head>
     <title>device page</title>
+    <style>
+        body{
+            background-color: lightblue;
+        }
+        .wrapper {
+            width : 500px ;
+            margin : 20px auto ;
+            background-color: white;
+            padding : 3px 120px 20px 120px ;
+            border-radius: 20px ;
+        }
+        .option{
+            margin-bottom: 5px ;
+            display : flex ;
+            font-size:larger;
+        }
+        button{
+            width : 100% ; 
+            padding : 8px 10px ;
+            font-size: 15px;
+            cursor: pointer;
+            background-color:lightblue ;
+            border : 0 ;
+            border-radius: 20px;
+        }
+        .nextBtn{
+            margin-left: 300px;
+            
+        }
+        .addBtn{
+            margin-right: 300px;
+            margin-top: -47px;
+        }
+    </style>
 </head>
 <body>
-    <h1 style="text-align:center">OCF Resource Tool</h1>
-    <h3 > Select Device Type :</h3>
+    <div class="wrapper">
+        <h1 style="text-align:center">OCF Resource Tool</h1>
+        <h3 > Select Device Type :</h3>
 
-    <form id='form' action="/resource" method="POST"  >
-        <div id = 'dev' ></div>
-        <script>
-            let content = ""
-            let devices = ['oic.d.airconditioner' , 'oic.d.airpurifier','oic.d.dishwasher','oic.d.dryer','oic.d.light','oic.d.oven','oic.d.refrigerator','oic.d.robotcleaner','oic.d.sensor','oic.d.smartlock' , 'oic.d.smartplug', 'oic.d.switch','oic.d.thermostat','oic.d.tv','oic.d.washer']
-            for(item of devices){
-                content += '<input type="radio" id=' + item + ' name = "device" value=' + item + '><label for =' + item + '>' + item +  '</label><br>'
-            }
-            document.getElementById("dev").innerHTML = content;
-        </script>
-    <button id = "next" type="submit">Next</button>
-    </form>
-    <form action="/addDevice" method="GET" >
-        <button id = "add" type="submit">Add device</button>
-    </form>
+        <form id='form' action="/resource" method="POST"  >
+            <div id = 'dev' class = "content" ></div>
+            <script>
+                let content = ""
+                let devices = ['oic.d.airconditioner' , 'oic.d.airpurifier','oic.d.dishwasher','oic.d.dryer','oic.d.light','oic.d.oven','oic.d.refrigerator','oic.d.robotcleaner','oic.d.sensor','oic.d.smartlock' , 'oic.d.smartplug', 'oic.d.switch','oic.d.thermostat','oic.d.tv','oic.d.washer']
+                for(item of devices){
+                    content += '<div class = "option" >'
+                    content += '<input type="radio" id=' + item + ' name = "device" value=' + item + '>'
+                    content += '<label for =' + item + '>' + item +  '</label><br>'
+                    content += '</div>'
+                }
+                document.getElementById("dev").innerHTML = content;
+                document.getElementById('oic.d.airconditioner').checked =true ;
+            </script>
+        <div class='nextBtn'>
+            <button id = "next" type="submit">Next</button>
+        </div>
+        </form>
+        <form action="/addDevice" method="GET" >
+            <div class="addBtn">
+                <button id = "add" type="submit">Add device</button>
+            </div>
+        </form>
+    </div>
 
 </body>
 </html>
