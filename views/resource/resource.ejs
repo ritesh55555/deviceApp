@@ -12,6 +12,11 @@
             padding : 3px 120px 20px 120px ;
             border-radius: 20px ;
         }
+        #resourceContent{
+            height : 300px ;
+            overflow: hidden;
+            overflow-y: scroll;
+        }
         .option{
             margin-bottom: 10px;
             align-items: center;
@@ -21,7 +26,7 @@
         }
         .option .input{
             width: 42%;
-            height : 4%;
+            height : 9%;
             font-size: 17px;
             margin-left: 20px;
             
@@ -77,7 +82,7 @@
                 const resourceHref = deviceData.mapType.resourceHref ;
                 for(i= 0 ; i<capability.length ; i++){
                     content += '<div class="option" > '
-                    content += `<input type="checkbox" id="${capability[i]}" name="${capability[i]}" value="${resourceType[i]}">`
+                    content += `<input type="checkbox" id="${capability[i]}" name="${capability[i]}" value="${resourceType[i]}" class="inputc">`
                     content += `<label for="${capability[i]}"> ${resourceType[i]}</label>`
                     content += `<input type="text" id="${capability[i]}" value="${resourceHref[i]}" name="${capability[i]}" class="input">`
                     content += '</div>'
@@ -106,7 +111,7 @@
             const resource = document.getElementById('resource').value ;
             const href = document.getElementById('href').value ;
             content += '<div class="option" > '
-            content += `<input type="checkbox" id="new" name="new" value="${resource}">`
+            content += `<input type="checkbox" id="new" name="new" value="${resource}" class="inputc">`
             content += `<label for="new"> ${resource}</label>`
             content += `<input type="text" id="new" value="${href}" name="new" class="input">`
             content += '</div>'

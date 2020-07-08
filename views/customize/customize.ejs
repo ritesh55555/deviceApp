@@ -12,20 +12,101 @@
             padding : 3px 120px 20px 120px ;
             border-radius: 20px ;
         }
+        #resourceContent{
+            height : 350px ;
+            overflow: hidden;
+            overflow-y: scroll;
+        }
+        .container{
+            border-style:groove;
+            border-radius: 10px;
+            margin : 10px 10px 10px 0px;
+            padding : 0px 10px 20px 20px ;
+        }
+        .container .content{
+            font-size: large;
+        }
+        .container .content .eachMap{
+            margin-bottom: 5px;
+        }
+        .container .content .eachMap label{
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        button{
+            width : 30% ; 
+            padding : 8px 10px ;
+            font-size: 15px;
+            cursor: pointer;
+            background-color:lightblue ;
+            border : 0 ;
+            border-radius: 20px;
+        
+        }
+        #generate{
+            margin-left: 300px;
+            margin-top:30px;
+            
+        }
+        #back{
+            margin-right: 300px;
+            margin-top: -47px;
+        }
     </style>
 </head>
 <body>
     <div class="wrapper">
         <h1 style="text-align:center">OCF Resource Tool</h1>
 
-        <h2 style="text-align:center">Customize selected Resource types for the device</h2>
+        <h2 style="text-align:center">Customize selected Resource types for the device <%= deviceName %></h2>
 
-        <h2>Work under process</h2>
+        <form action="/generate" method="POST">
 
+            <div id='resourceContent' ></div>
+            <script>
+                var deviceData = <%- JSON.stringify(newDeviceData) %> ;
+                let content ="" ;
+                const capability =   deviceData.mapType.capability;
+                const resourceType = deviceData.mapType.resourceType ;
+                const resourceHref = deviceData.mapType.resourceHref ;
+                for(i=0 ; i<capability.length ; i++){
+                    content += '<div class= "container" >' ;
+                    content += `<h3 style="text-align:center">${resourceType[i]} ${resourceHref[i]}</h3> `;
+                    
+                    if ( "valueMap" in deviceData["mapData"][capability[i][0]] ){
+                        content += '<div class= "content" >' ;
+                        let valueMap = deviceData["mapData"][capability[i][0]]['valueMap'][0] ;      
+                        for(j=0 ; j<valueMap["STValue"].length ; j++){
+                            content += '<div class="eachMap">'
+                            content += `<input type="checkbox" id="${valueMap["STValue"][j]}" name="${capability[i][0]+valueMap["STValue"][j]}" value="${valueMap["STValue"][j]}" >`
+                            content += `<label for="${valueMap["STValue"][j]}"> ${valueMap["STValue"][j]}</label>`
+                            content += '<label> OCF value map </label>' ;
+                            content += `<input type="text" id="${valueMap["STValue"][j]}" value="${valueMap["OCFValue"][j]}" name="${capability[i][0]+valueMap["STValue"][j]}" class="input">`
+                            content += '</div>'
+                        }
+                        content += '</div>'
+                    }
+                    else {
+                        content += '<div class= "content" >' ;
+                        content += '<p>No customization required<p>'
+                        content += '</div>';
+                    }
+                    content += '</div>';
+                }
+                if (capability.length == 0){
+                    content += '<h2>You have not selected any resource types</h2>'
+                }
+                document.getElementById("resourceContent").innerHTML = content;
+            </script>
+
+            <button id = 'generate' type="submit">Generate</button>
+
+        </form>
 
         <form action="/resource" method="GET" >
             <button id = "back" type="submit">Back</button>
         </form>
+
     </div>
 
 </body>
