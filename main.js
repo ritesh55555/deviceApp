@@ -62,7 +62,7 @@ router.get('/customize' , (req,res)=>{
 //handling generate button request
 router.post('/generate' , urlencodedParser , (req,res)=>{
     modifValueMap(req.body) ; 
-    const data = JSON.stringify(newDeviceData , null ,4);
+    const data = JSON.stringify(newDeviceData , null ,2);
     fs.writeFile('data.json' , data  , (e)=>{
         if (e) throw e ;  
     }) ; 

@@ -32,6 +32,11 @@
         .container .content .eachMap label{
             margin-left: 10px;
             margin-right: 10px;
+
+        }
+        .container .content .eachMap .ocf{
+            display: inline-block;
+            width : 60px ;
         }
         button{
             width : 30% ; 
@@ -79,8 +84,8 @@
                         for(j=0 ; j<valueMap["STValue"].length ; j++){
                             content += '<div class="eachMap">'
                             content += `<input type="checkbox" id="${valueMap["STValue"][j]}" name="${capability[i][0]+valueMap["STValue"][j]}" value="${valueMap["STValue"][j]}" >`
-                            content += `<label for="${valueMap["STValue"][j]}"> ${valueMap["STValue"][j]}</label>`
-                            content += '<label> OCF value map </label>' ;
+                            content += `<label class="ocf" for="${valueMap["STValue"][j]}"> ${valueMap["STValue"][j]}</label>`
+                            content += '<label > OCF value map </label>' ;
                             content += `<input type="text" id="${valueMap["STValue"][j]}" value="${valueMap["OCFValue"][j]}" name="${capability[i][0]+valueMap["STValue"][j]}" class="input">`
                             content += '</div>'
                         }

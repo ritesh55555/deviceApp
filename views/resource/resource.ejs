@@ -6,11 +6,29 @@
             background-color: lightblue;
         }
         .wrapper {
-            width : 500px ;
+            width : 600px ;
             margin : 20px auto ;
             background-color: white;
             padding : 3px 120px 20px 120px ;
             border-radius: 20px ;
+        }
+        #first{
+            display: inline-block;
+            width : 200px;
+            font-size: 20px;
+            margin-left: 32px;
+            margin-top: -30px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        #second{
+            display: inline-block;
+            width : 200px;
+            font-size: 20px;
+            margin-left: 45px;
+            margin-top: -30px;
+            margin-bottom: 10px;
+            font-weight: bold;
         }
         #resourceContent{
             height : 300px ;
@@ -22,7 +40,13 @@
             align-items: center;
         }
         .option label{
-            font-size: 18px ;
+            display: inline-block;
+            width : 230px ;
+            font-size: 20px ;
+        }
+        .option .inputc{
+            height : auto ; 
+            margin-right: 15px;
         }
         .option .input{
             width: 42%;
@@ -32,17 +56,18 @@
             
         }
         .addOption{
-            margin : 30px 0px 20px 0px ;
+            margin : 30px 40px 20px 0px ;
             padding : 5px 5px 5px 5px ;
             border-style: outset;
         }
         .addOption input{
+            width : 200px ;
             height : 30px  ;
             font-size: 14px;
             margin-right: 20px;
         }
         button{
-            width : 100% ; 
+            width : 60% ; 
             padding : 8px 10px ;
             font-size: 15px;
             cursor: pointer;
@@ -70,6 +95,10 @@
         <h1 style="text-align:center">OCF Resource Tool</h1>
 
         <h2 style="text-align:center">Select Resource types for the device <%= deviceName %> </h2>
+        <div class="title">
+            <label id='first'>Resource Type</label>
+            <label id='second'>Resource Href</label>
+        </div>
 
         <form action="/customize" method="post" >
             <div id='resourceContent' ></div>
