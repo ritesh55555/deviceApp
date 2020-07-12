@@ -62,7 +62,8 @@ router.get('/customize' , (req,res)=>{
 //handling generate button request
 router.post('/generate' , urlencodedParser , (req,res)=>{
     modifValueMap(req.body) ; 
-    const data = JSON.stringify(newDeviceData , null ,2);
+    let data = JSON.stringify(newDeviceData , null ,2);
+    data = indent_data(data) ; 
     fs.writeFile('data.json' , data  , (e)=>{
         if (e) throw e ;  
     }) ; 
@@ -106,4 +107,15 @@ function modifValueMap( info ){
             }
         }
     }
+}
+
+function indent_data (data){
+    data = data.replace(/\[\n        /g , '[') ;
+    data = data.replace(/"\n      /g , '"') ;
+    data = data.replace(/",\n        /g , '", ');
+    data = data.replace(/null\n      ],/g , 'null],');
+    data = data.replace(/null,\n        /g , 'null, ');
+    data = data.replace(/true,\n            /g, 'true,    ');
+    data = data.replace(/false\n          /g,'false     ');
+    return data ; 
 }

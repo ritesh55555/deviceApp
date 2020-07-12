@@ -1,176 +1,80 @@
 {
   "mapType": {
     "capability": [
-      [
-        "switch"
-      ],
-      [
-        "thermostatCoolingSetpoint"
-      ],
-      [
-        "thermostatHeatingSetpoint"
-      ],
-      [
-        "temperatureMeasurement"
-      ]
+      ["doorControl"],
+      ["rapidCooling"],
+      ["temperatureMeasurement"],
+      ["refrigerationSetpoint"]
     ],
     "resourceType": [
-      [
-        "oic.r.switch.binary"
-      ],
-      [
-        "oic.r.temperature"
-      ],
-      [
-        "oic.r.temperature"
-      ],
-      [
-        "oic.r.temperature"
-      ]
+      ["oic.r.door"],
+      ["oic.r.refrigeration"],
+      ["oic.r.temperature"],
+      ["oic.r.temperature"]
     ],
     "resourceHref": [
-      "/powerswitch",
-      "/coolingtargettemperature",
-      "/heatingtargettemperature",
-      "/currenttemperature"
+      "/coolerdoor",
+      "/refrigeration",
+      "/coolermeasuredtemperature",
+      "/coolertargettemperature"
     ]
   },
   "mapData": {
-    "switch": {
-      "property": [
-        "value"
-      ],
-      "propertyType": [
-        "bool"
-      ],
-      "if": [
-        "oic.if.a",
-        "oic.if.baseline"
-      ],
+    "doorControl": {
+      "property": ["openState"],
+      "propertyType": ["string"],
+      "if": ["oic.if.s", "oic.if.baseline"],
       "component": "main",
-      "attribute": [
-        "switch"
-      ],
-      "attributeType": [
-        "string"
-      ],
-      "command": [
-        "on",
-        "off"
-      ],
-      "commandProperty": [
-        "value",
-        "value"
-      ],
+      "attribute": ["door"],
+      "attributeType": ["string"],
+      "command": ["close", "open"],
+      "commandProperty": ["openState", "openState"],
       "useCommandValue": true,
-      "unit": [
-        null
-      ],
-      "valueMap": [
-        {
-          "STValue": [
-            "on",
-            "off"
-          ],
-          "OCFValue": [
-            "true",
-            "false"
-          ]
+      "unit": [null],
+      "valueMap": [{
+          "STValue": [    "closed",     "open",     "closing",     "opening"    ],
+          "OCFValue": [    "Closed",     "Open",     "Closed",     "Open"    ]
         }
       ]
     },
-    "thermostatCoolingSetpoint": {
-      "property": [
-        "temperature",
-        "units"
-      ],
-      "propertyType": [
-        "number",
-        "string"
-      ],
-      "if": [
-        "oic.if.a",
-        "oic.if.baseline"
-      ],
+    "rapidCooling": {
+      "property": ["rapidCool"],
+      "propertyType": ["bool"],
+      "if": ["oic.if.a", "oic.if.baseline"],
       "component": "main",
-      "attribute": [
-        "coolingSetpoint",
-        null
-      ],
-      "command": [
-        "setCoolingSetpoint"
-      ],
-      "commandProperty": [
-        "temperature"
-      ],
-      "attributeType": [
-        "number",
-        null
-      ],
-      "hasUnit": true,
-      "unit": [
-        "C"
-      ]
-    },
-    "thermostatHeatingSetpoint": {
-      "property": [
-        "temperature",
-        "units"
-      ],
-      "propertyType": [
-        "number",
-        "string"
-      ],
-      "if": [
-        "oic.if.a",
-        "oic.if.baseline"
-      ],
-      "component": "main",
-      "attribute": [
-        "heatingSetpoint",
-        null
-      ],
-      "command": [
-        "setHeatingSetpoint"
-      ],
-      "commandProperty": [
-        "temperature"
-      ],
-      "attributeType": [
-        "number",
-        null
-      ],
-      "hasUnit": true,
-      "unit": [
-        "C"
+      "attribute": ["rapidCooling"],
+      "attributeType": ["string"],
+      "command": ["setRapidCooling"],
+      "commandProperty": ["rapidCool"],
+      "commandArguments": true,
+      "unit": [null],
+      "valueMap": [{
+          "STValue": [    "on",     "off"    ],
+          "OCFValue": [    true,    false     ]
+        }
       ]
     },
     "temperatureMeasurement": {
-      "property": [
-        "temperature",
-        "units"
-      ],
-      "propertyType": [
-        "number",
-        "string"
-      ],
-      "if": [
-        "oic.if.s",
-        "oic.if.baseline"
-      ],
+      "property": ["temperature", "units"],
+      "propertyType": ["number", "string"],
+      "if": ["oic.if.s", "oic.if.baseline"],
       "component": "main",
-      "attribute": [
-        "temperature",
-        null
-      ],
-      "attributeType": [
-        "number",
-        null
-      ],
+      "attribute": ["temperature", null],
+      "attributeType": ["number", null],
       "hasUnit": true,
-      "unit": [
-        "C"
-      ]
+      "unit": ["C"]
+    },
+    "refrigerationSetpoint": {
+      "property": ["temperature", "units"],
+      "propertyType": ["number", "string"],
+      "if": ["oic.if.a", "oic.if.baseline"],
+      "component": "main",
+      "attribute": ["refrigerationSetpoint", null],
+      "command": ["setRefrigerationSetpoint"],
+      "commandProperty": ["temperature"],
+      "attributeType": ["number", null],
+      "hasUnit": true,
+      "unit": ["C"]
     }
   }
 }
